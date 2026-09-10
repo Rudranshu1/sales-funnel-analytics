@@ -1,0 +1,10 @@
+# Normalize line endings so Windows tools (Jupyter, Workbench, VS Code)
+# and Linux/Mac tools don't fight over \r\n vs \n and create fake diffs.
+* text=auto eol=lf
+
+# Data files: force LF regardless of OS, since these are opened by
+# pandas/MySQL, not edited by hand.
+*.csv text eol=lf
+*.py text eol=lf
+*.sql text eol=lf
+*.ipynb text eol=lf
