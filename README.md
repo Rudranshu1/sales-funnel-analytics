@@ -2,6 +2,8 @@
 
 A data analyst portfolio project examining where an inside-sales lead funnel leaks, which lead sources and reps actually drive revenue, and how much a single operational lever — response speed — is worth.
 
+**Live dashboard: [sales-funnel-analytics.streamlit.app](https://sales-funnel-analytics.streamlit.app)** — filter by source, region, rep, and date range and every KPI and chart updates instantly. No install needed.
+
 ## Why this project
 
 Instead of a generic public dataset, this project uses a **fully synthetic lead-funnel dataset** (`data/generate_data.py`, fixed random seed) that mimics 18 months of activity for an inside-sales team, then deliberately reintroduces realistic CRM-export messiness — duplicate rows from a sync double-firing, missing region values, inconsistent source/product casing and abbreviations, three different date formats on `created_at`, currency-formatted strings mixed into a numeric `deal_value` column, and a handful of negative response-time entry errors (`data/messify.py`). That messy export is then cleaned through a documented, auditable pipeline (`notebooks/01_data_cleaning.ipynb`) rather than starting from a pre-cleaned CSV.
@@ -22,7 +24,7 @@ Across 7,000 leads:
 - **Late-stage losses (leads that reached Demo Completed or further before falling through) total roughly $1.13M in lost pipeline value**, led by Price Objection ($363K) and No Response/Ghosted ($244K) — these are the deals worth the most focused save-play attention, since they represent fully-qualified pipeline, not top-of-funnel noise.
 - **Rep performance varies more than 8x by win rate** — the top rep closes at 29.2% against the team's 13.4% average, while the bottom rep sits at 3.6%, despite the middle-of-pack reps handling comparable lead volume. Worth investigating whether this is a coaching gap or a lead-routing/territory issue.
 
-Full breakdowns (funnel by stage, win rate by source/response-time/rep, lost pipeline value by reason, monthly trend) are in [`sql/02_kpi_queries.sql`](sql/02_kpi_queries.sql), [`notebooks/02_analysis_and_charts.ipynb`](notebooks/02_analysis_and_charts.ipynb), the interactive Streamlit dashboard, and the Power BI report.
+Full breakdowns (funnel by stage, win rate by source/response-time/rep, lost pipeline value by reason, monthly trend) are in [`sql/02_kpi_queries.sql`](sql/02_kpi_queries.sql), [`notebooks/02_analysis_and_charts.ipynb`](notebooks/02_analysis_and_charts.ipynb), the [live Streamlit dashboard](https://sales-funnel-analytics.streamlit.app), and the Power BI report.
 
 ## Recommendations
 
@@ -86,6 +88,8 @@ cd ../notebooks && jupyter notebook 02_analysis_and_charts.ipynb
 # Interactive dashboard:
 cd .. && streamlit run app/dashboard.py
 ```
+
+Or skip the local setup entirely and use the **[hosted dashboard](https://sales-funnel-analytics.streamlit.app)** directly.
 
 For the Power BI report, open `powerbi/Sales_Funnel_Analytics.pbix` in Power BI Desktop, or view the exported pages in `screenshots/Sales_Funnel_Analytics.pdf`.
 
